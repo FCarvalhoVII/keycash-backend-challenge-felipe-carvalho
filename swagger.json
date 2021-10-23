@@ -1,0 +1,202 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Keycash Backend Code Challenge",
+        "description": "API REST/CRUD",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/register": {
+            "post": {
+                "summary": "Cadastro de imóvel",
+                "description": "Essa rota será responsável por cadastrar um novo imóvel",
+                "tags": ["Realty"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Realty"
+                            },
+                            "examples": {
+                                "realty": {
+                                    "value": {
+                                        "address": "Rua de exemplo",
+                                        "bathroom": 2,
+                                        "bedroom": 3,
+                                        "city": "Cidade",
+                                        "neighborhood": "Bairro",
+                                        "parkingSpace": 1,
+                                        "price": 300000,
+                                        "size": 100,
+                                        "state": "MG",
+                                        "type": "apartment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/list/{id}": {
+            "get": {
+                "description": "Busca o imóvel pelo ID",
+                "summary": "Consulta de um imóvel",
+                "tags": ["Realty"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do imóvel que deseja consultar",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/update/{id}": {
+            "put": {
+                "summary": "Atualização de um imóvel",
+                "description": "Essa rota será responsável por atualizar as informações de um imóvel",
+                "tags": ["Realty"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do imóvel que deseja atualizar",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Realty"
+                            },
+                            "examples": {
+                                "realty": {
+                                    "value": {
+                                        "address": "Rua de exemplo",
+                                        "bathroom": 2,
+                                        "bedroom": 3,
+                                        "city": "Cidade",
+                                        "neighborhood": "Bairro",
+                                        "parkingSpace": 1,
+                                        "price": 300000,
+                                        "size": 100,
+                                        "state": "MG",
+                                        "type": "apartment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delete/{id}": {
+            "delete": {
+                "description": "Deleta um imóvel do banco de dados pelo seu ID",
+                "summary": "Exclusão de um imóvel",
+                "tags": ["Realty"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do imóvel que deseja excluir",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/search": {
+            "get": {
+                "description": "Filtro de imóveis pelo: tipo, número de quartos, banheiros, vagas de garagem, cidade, bairro e o número da página",
+                "summary": "Filtro de busca",
+                "tags": ["Realty"],
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Tipo de imóvel (house/apartment)",
+                        "required": false
+                    },
+                    {
+                        "name": "bedroom",
+                        "in": "query",
+                        "description": "Número de quartos",
+                        "required": false
+                    },
+                    {
+                        "name": "bathroom",
+                        "in": "query",
+                        "description": "Número de banheiros",
+                        "required": false
+                    },
+                    {
+                        "name": "parkingSpace",
+                        "in": "query",
+                        "description": "Número de vagas na garagem",
+                        "required": false
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "Nome da cidade",
+                        "required": false
+                    },
+                    {
+                        "name": "neighborhood",
+                        "in": "query",
+                        "description": "Nome do bairro",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Número da página",
+                        "required": false
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Realty": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string"
+                    },
+                    "bathroom": {
+                        "type": "number"
+                    },
+                    "bedroom": {
+                        "type": "number"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "neighborhood": {
+                        "type": "string"
+                    },
+                    "parkingSpace": {
+                        "type": "number"
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "size": {
+                        "type": "number"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "RealtyTypeEnum"
+                    }
+                }
+            }
+        }
+    }
+}
